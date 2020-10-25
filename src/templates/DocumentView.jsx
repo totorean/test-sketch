@@ -1,5 +1,8 @@
-import React from 'react';
-import { useQuery, gql } from '@apollo/client';
+import React, { Fragment } from 'react';
+import { gql, useQuery } from '@apollo/client';
+import styled from 'styled-components';
+import Header from '../sections/Header';
+import ArtboardItem from '../components/ArtboardItem';
 
 const DOCUMENT_DATA = gql`
     query GetDocumentData {
@@ -31,11 +34,26 @@ const DOCUMENT_DATA = gql`
     }
 `;
 
+const ArtboardList = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+`;
+
 export default function DocumentView() {
     const { loading, error, data } = useQuery(DOCUMENT_DATA);
 
     if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error</p>;
+    if (error) return `Error! ${error}`;
 
-    return data.share.version.document.artboards.entries.map(({ name }) => <p>{name}</p>);
+    return (
+        <>
+            <Header docName={data.share.version.document.name} />
+            <ArtboardList>
+                {data.share.version.document.artboards.entries.map((artboard) => (
+                    <ArtboardItem data={artboard} />
+                ))}
+            </ArtboardList>
+        </>
+    );
 }

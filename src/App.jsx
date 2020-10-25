@@ -11,7 +11,6 @@ function App() {
     return (
         <ApolloProvider client={client}>
             <div className="App">
-                <header>Sketch Test</header>
                 <DocumentView />
             </div>
         </ApolloProvider>
