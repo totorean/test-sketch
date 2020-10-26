@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { gql, useQuery } from '@apollo/client';
 import styled from 'styled-components';
-import Header from '../sections/Header';
+import { Link, useRouteMatch } from 'react-router-dom';
+import DocumentHeader from '../sections/DocumentHeader';
 import ArtboardItem from '../components/ArtboardItem';
 
 const DOCUMENT_DATA = gql`
@@ -37,21 +38,26 @@ const DOCUMENT_DATA = gql`
 const ArtboardList = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
 `;
 
 export default function DocumentView() {
     const { loading, error, data } = useQuery(DOCUMENT_DATA);
+    const { path, url } = useRouteMatch();
 
     if (loading) return <p>Loading...</p>;
     if (error) return `Error! ${error}`;
 
+    console.log(data);
+    console.log(path);
+    console.log(url);
     return (
         <>
-            <Header docName={data.share.version.document.name} />
+            <DocumentHeader docName={data.share.version.document.name} />
             <ArtboardList>
-                {data.share.version.document.artboards.entries.map((artboard) => (
-                    <ArtboardItem data={artboard} />
+                {data.share.version.document.artboards.entries.map((artboard, index) => (
+                    <Link to={`/${index}`} key={artboard.name.toLowerCase().replace(' ', '-')}>
+                        <ArtboardItem data={artboard} />
+                    </Link>
                 ))}
             </ArtboardList>
         </>
