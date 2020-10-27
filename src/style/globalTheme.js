@@ -7,12 +7,14 @@ export const theme = {
     labelColor: '#727272',
     bgHeader: '#FFFFFF',
     borderHeader: '#EBEBEB',
+
+    headerHeight: '60px',
 };
 
 export const SketchHeader = styled.header`
     color: ${theme.textColor};
     filter: drop-shadow(0 1px 3px ${theme.borderHeader});
-    height: 60px;
+    height: ${theme.headerHeight};
     background-color: ${theme.bgHeader};
     padding: 15px 20px;
     box-sizing: border-box;
@@ -24,4 +26,15 @@ export const TransparentButton = styled.button`
     background: transparent;
     border: none;
     cursor: pointer;
+`;
+
+export const CenteredParagraph = styled.p`
+    font-size: 1.4rem;
+    text-align: center;
+    margin-top: 200px;
+`;
+
+export const CenteredDiv = styled.div`
+    text-align: center;
+    margin-top: 200px;
 `;

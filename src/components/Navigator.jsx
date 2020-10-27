@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { TransparentButton } from '../style/globalTheme';
@@ -12,8 +12,9 @@ const NavWrapper = styled.div`
 `;
 
 const NavButton = styled(TransparentButton)`
-    &:disabled .img {
-        opacity: 0.7;
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
     }
 `;
 
@@ -28,26 +29,25 @@ const Breadcrumb = styled.img`
     margin-bottom: 3px;
 `;
 
-function Navigator({ count, startIndex, goToItem }) {
-    const [currentIndex] = useState(startIndex);
+function Navigator({ count, index, goToIndex }) {
     return (
         <NavWrapper>
             <NavButton
                 type="button"
                 ariaLabel="Go to previous"
-                onClick={() => goToItem(currentIndex - 1)}
-                disabled={currentIndex === 1}
+                onClick={() => goToIndex(index - 1)}
+                disabled={index === 0}
             >
                 <img src={prev} alt="" />
             </NavButton>
-            <Number>{currentIndex}</Number>
+            <Number>{index + 1}</Number>
             <Breadcrumb src={breadcrumb} alt="" />
             <Number>{count}</Number>
             <NavButton
                 type="button"
                 ariaLabel="Go to next"
-                onClick={() => goToItem(currentIndex + 1)}
-                disabled={currentIndex === count}
+                onClick={() => goToIndex(index + 1)}
+                disabled={index === count - 1}
             >
                 <img src={next} alt="" />
             </NavButton>
@@ -57,8 +57,8 @@ function Navigator({ count, startIndex, goToItem }) {
 
 Navigator.propTypes = {
     count: PropTypes.number.isRequired,
-    startIndex: PropTypes.number.isRequired,
-    goToItem: PropTypes.func.isRequired,
+    index: PropTypes.number.isRequired,
+    goToIndex: PropTypes.func.isRequired,
 };
 
 export default Navigator;

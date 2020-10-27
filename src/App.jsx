@@ -1,8 +1,8 @@
 import React from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import DocumentView from './templates/DocumentView';
-import ArtboardView from './templates/ArtboardView';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Document from './pages/Document';
 
 const client = new ApolloClient({
     uri: 'https://graphql.sketch.cloud/api',
@@ -14,14 +14,12 @@ function App() {
         <ApolloProvider client={client}>
             <Router>
                 <div className="App">
-                    <Switch>
-                        <Route path="/" exact>
-                            <DocumentView />
-                        </Route>
-                        <Route path="/:artboardIndex">
-                            <ArtboardView />
-                        </Route>
-                    </Switch>
+                    <Route exact path="/">
+                        <Home />
+                    </Route>
+                    <Route path="/:documentId">
+                        <Document />
+                    </Route>
                 </div>
             </Router>
         </ApolloProvider>

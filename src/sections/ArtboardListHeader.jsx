@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { SketchHeader } from '../style/globalTheme';
@@ -23,11 +24,13 @@ const DocName = styled.p`
     font-size: 1.6rem;
 `;
 
-function DocumentHeader({ docName }) {
+export default function ArtboardListHeader({ docName }) {
     return (
         <SketchHeader>
             <Container>
-                <LogoImg src={logo} alt="sketch logo" />
+                <Link to="/" title="Home">
+                    <LogoImg src={logo} alt="sketch logo" />
+                </Link>
                 <SeparatorImg src={separator} alt="" />
                 <DocName>{docName}</DocName>
             </Container>
@@ -35,8 +38,6 @@ function DocumentHeader({ docName }) {
     );
 }
 
-DocumentHeader.propTypes = {
+ArtboardListHeader.propTypes = {
     docName: PropTypes.string.isRequired,
 };
-
-export default DocumentHeader;

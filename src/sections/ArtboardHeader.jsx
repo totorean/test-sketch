@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Navigator from '../components/Navigator';
@@ -23,13 +24,26 @@ const ArtboardName = styled.p`
     width: 33%;
 `;
 
-function ArtboardHeader({ artboardName }) {
+export default function ArtboardHeader({ artboardName, count }) {
+    const { documentId, artboardIndex } = useParams();
+    const history = useHistory();
+
     return (
         <SketchHeader>
             <Container>
-                <CloseButton closeHandler={() => {}} />
+                <CloseButton
+                    closeHandler={() => {
+                        history.push(`/${documentId}`);
+                    }}
+                />
                 <SeparatorImg src={separator} alt="" />
-                <Navigator count={12} startIndex={3} goToItem={() => {}} />
+                <Navigator
+                    count={parseInt(count, 10)}
+                    index={parseInt(artboardIndex, 10)}
+                    goToIndex={(index) => {
+                        history.push(`/${documentId}/a/${index}`);
+                    }}
+                />
             </Container>
             <ArtboardName>{artboardName}</ArtboardName>
         </SketchHeader>
@@ -38,6 +52,5 @@ function ArtboardHeader({ artboardName }) {
 
 ArtboardHeader.propTypes = {
     artboardName: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
 };
-
-export default ArtboardHeader;
