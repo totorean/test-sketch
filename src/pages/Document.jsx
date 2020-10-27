@@ -49,7 +49,8 @@ export default function Document() {
     }
 
     if (loading) return <CenteredParagraph>Loading...</CenteredParagraph>;
-    if (error) return <CenteredParagraph>Error fetching document data! {error}</CenteredParagraph>;
+    if (error)
+        return <CenteredParagraph>Error fetching document data! {error.message}</CenteredParagraph>;
 
     return (
         <>

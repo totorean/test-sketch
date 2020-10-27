@@ -43,3 +43,5 @@ defined a global theme with reusable component styles and variables (could divid
 
 a git hook for linting<br/>
 would have liked to decouple the sections code from the server object structure, make them agnostic of it - write some adapters
+more error handling, ErrorBoundaries
+pay more attention to a11y, navigator has no keyboard control
