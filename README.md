@@ -4,8 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Install Node on your machine from https://nodejs.org/en/download/<br/>
 Clone the repository locally<br/>
-In your terminal, go to the `test-sketch` directory and run `npm start`<br/>
-The app will start in your browser<br/>
+In your terminal, go to the `test-sketch` directory and run `npm i && npm start`<br/>
+The app will start in your browser on http://localhost:3000/<br/>
 
 ## Project structure
 
