@@ -44,8 +44,10 @@ export default function Document() {
         variables: { docId: documentId },
     });
 
-    function getArtboard(index) {
-        return data.share.version.document.artboards.entries[index];
+    function getArtboard(artboardName) {
+        return data.share.version.document.artboards.entries.find(
+            (artboard) => artboard.name === artboardName
+        );
     }
 
     if (loading) return <CenteredParagraph>Loading...</CenteredParagraph>;
@@ -59,9 +61,9 @@ export default function Document() {
                 <ArtboardListView artboards={data.share.version.document.artboards.entries} />
             </Route>
             <Route
-                path={`${path}/a/:artboardIndex`}
+                path={`${path}/a/:artboardName`}
                 render={(routeParams) => {
-                    const currentArtboard = getArtboard(routeParams.match.params.artboardIndex);
+                    const currentArtboard = getArtboard(routeParams.match.params.artboardName);
                     return (
                         <>
                             <ArtboardHeader

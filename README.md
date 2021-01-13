@@ -1,4 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The requirements can be found here:
+
+-   [Frontend](./doc/requirements.md)
 
 ## How to run
 
